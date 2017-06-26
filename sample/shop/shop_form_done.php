@@ -54,8 +54,8 @@ for($i=0;$i<$max;$i++)
         
           $sql='SELECT stock FROM dat_stock WHERE code_product=?';
 	$stmt=$dbh->prepare($sql);
-	$data2[0]=$cart[$i];
-	$stmt->execute($data2);
+	$data[0]=$cart[$i];
+	$stmt->execute($data);
         $rec=$stmt->fetch(PDO::FETCH_ASSOC);
         $pro_stock=$rec['stock'];
            
@@ -70,11 +70,11 @@ if($flag_short==1){
 }
 else{//--------------------------------在庫不足の場合は以下を実行しない
     
-print $oname.'様<br />';
+print $onamae.'様<br />';
 print 'ご注文ありがとうございました。<br />';
 print $email.'にメールを送りしましたのでご確認ください。<br / >';
 print '商品は以下の住所に発送させていただきます。<br />';
-print $posta11.'-'.$posta12.'<br />';
+print $postal1.'-'.$postal2.'<br />';
 print $address.'<br />';
 print $tel.'<br />';
 

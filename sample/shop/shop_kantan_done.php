@@ -63,11 +63,6 @@ for($i=0;$i<$max;$i++)
 	$data[0]=$cart[$i];
 	$stmt->execute($data);
         
-        $sql='SELECT stock FROM dat_stock WHERE code_product=?';
-	$stmt=$dbh->prepare($sql);
-	$data2[0]=$cart[$i];
-	$stmt->execute($data2);
-
 	$rec=$stmt->fetch(PDO::FETCH_ASSOC);
 
 	$name=$rec['name'];
@@ -80,6 +75,8 @@ for($i=0;$i<$max;$i++)
 	$honbun.=$price.'円 x ';
 	$honbun.=$suryo.'個 = ';
 	$honbun.=$shokei."円\n";
+        
+      
 }
 
 //$sql='LOCK TABLES dat_sales,dat_sales_product WRITE';
