@@ -86,7 +86,7 @@ $honbun.="-------------------\n";
 
 for($i=0;$i<$max;$i++)
 {
-	$sql='SELECT name,price, FROM mst_product WHERE code=?';
+	$sql='SELECT name,price FROM mst_product WHERE code=?';
         $stmt=$dbh->prepare($sql);
         $data[0]=$cart[$i];
         $stmt->execute($data);
@@ -169,12 +169,12 @@ for($i=0;$i<$max;$i++)
 	$data[]=$kazu[$i];
 	$stmt->execute($data);
         
-            $sql='UPDATE dat_stock SET stock=? WHERE code_product=?';
-            $stmt=$dbh->prepare($sql);
-            $data2=array();
-            $data2[]=0;
-            $data2[]=$cart[$i];
-            $stmt->execute($data2);
+           // $sql='UPDATE dat_stock SET stock=? WHERE code_product=?';
+           // $stmt=$dbh->prepare($sql);
+           // $data2=array();
+           // $data2[]=0;
+           // $data2[]=$cart[$i];
+           // $stmt->execute($data2);
             
             $sql='SELECT stock FROM dat_stock WHERE code_product=?';
             $stmt=$dbh->prepare($sql);
@@ -186,7 +186,7 @@ for($i=0;$i<$max;$i++)
             $suryou=$kazu[$i];
             $sub_stock=$pro_stock-$suryou;
             
-            $sql='UPDATE dat_stock SET stock=? WHERE cocde_product=?';
+            $sql='UPDATE dat_stock SET stock=? WHERE code_product=?';
             $stmt=$dbh->prepare($sql);
             $data2=array();
             $data2[]=$sub_stock;
