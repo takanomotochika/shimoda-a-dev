@@ -19,7 +19,7 @@ else
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ろくまる農園</title>
+<title>YOMOTTO書籍販売</title>
 </head>
 <body>
 
@@ -30,11 +30,22 @@ try
 
 $pro_code=$_GET['procode'];
 
+require_once('../common/common.php');
+if (DEBUG) {
 $dsn='mysql:dbname=shop;host=localhost;charset=utf8';
 $user='root';
 $password='';
 $dbh=new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+}
+else{
+$dbServer = '127.0.0.1';
+$dbUser = $_SERVER['MYSQL_USER'];
+$dbPass = $_SERVER['MYSQL_PASSWORD'];
+$dbName = $_SERVER['MYSQL_DB'];
+$dsn = "mysql:host={$dbServer};dbname={$dbName};charset=utf8";
+$dbh = new PDO($dsn, $dbUser, $dbPass);
+}
 
 $sql='SELECT name,price,gazou FROM mst_product WHERE code=?';
 $stmt=$dbh->prepare($sql);
@@ -45,6 +56,14 @@ $rec=$stmt->fetch(PDO::FETCH_ASSOC);
 $pro_name=$rec['name'];
 $pro_price=$rec['price'];
 $pro_gazou_name=$rec['gazou'];
+
+$sql='SELECT stock FROM dat_stock WHERE code_product=?';
+$stmt2=$dbh->prepare($sql);
+$data2[]=$pro_code;
+$stmt2->execute($data2);
+
+$rec=$stmt2->fetch(PDO::FETCH_ASSOC);
+$pro_stock=$rec['stock'];
 
 $dbh=null;
 
@@ -76,6 +95,9 @@ catch(Exception $e)
 <br />
 価格<br />
 <?php print $pro_price; ?>円
+<br />
+在庫数<br />
+<?php print $pro_stock; ?>個
 <br />
 <?php print $disp_gazou; ?>
 <br />

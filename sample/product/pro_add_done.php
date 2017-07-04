@@ -19,7 +19,7 @@ else
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ろくまる農園</title>
+<title>YOMOTTO書籍販売</title>
 </head>
 <body>
 
@@ -33,13 +33,25 @@ require_once('../common/common.php');
 $post=sanitize($_POST);
 $pro_name=$post['name'];
 $pro_price=$post['price'];
+$pro_stock=$post['stock'];
 $pro_gazou_name=$post['gazou_name'];
 
+require_once('../common/common.php');
+if (DEBUG) {
 $dsn='mysql:dbname=shop;host=localhost;charset=utf8';
 $user='root';
 $password='';
 $dbh=new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+}
+else{
+$dbServer = '127.0.0.1';
+$dbUser = $_SERVER['MYSQL_USER'];
+$dbPass = $_SERVER['MYSQL_PASSWORD'];
+$dbName = $_SERVER['MYSQL_DB'];
+$dsn = "mysql:host={$dbServer};dbname={$dbName};charset=utf8";
+$dbh = new PDO($dsn, $dbUser, $dbPass);
+}
 
 $sql='INSERT INTO mst_product(name,price,gazou) VALUES (?,?,?)';
 $stmt=$dbh->prepare($sql);
@@ -47,6 +59,14 @@ $data[]=$pro_name;
 $data[]=$pro_price;
 $data[]=$pro_gazou_name;
 $stmt->execute($data);
+
+$pro_code = $dbh->lastInsertId();
+
+$sql='INSERT INTO dat_stock(code_product,stock) VALUES (?,?)';
+$stmt=$dbh->prepare($sql);
+$data2[]=$pro_code;
+$data2[]=$pro_stock;
+$stmt->execute($data2);
 
 $dbh=null;
 
