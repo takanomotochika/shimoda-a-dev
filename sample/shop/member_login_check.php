@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ろくまる農園</title>
+<title>YOMOTTO書籍販売</title>
 </head>
 <body>
 <?php
@@ -27,7 +27,6 @@ $dbh=new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 }
 else{
-
 $dbServer = '127.0.0.1';
 $dbUser = $_SERVER['MYSQL_USER'];
 $dbPass = $_SERVER['MYSQL_PASSWORD'];
@@ -36,7 +35,6 @@ $dsn = "mysql:host={$dbServer};dbname={$dbName};charset=utf8";
 $dbh = new PDO($dsn, $dbUser, $dbPass);
 
 }
-
 
 $sql='SELECT code,name FROM dat_member WHERE email=? AND password=?';
 $stmt=$dbh->prepare($sql);

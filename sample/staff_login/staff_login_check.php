@@ -28,7 +28,6 @@ $dbh=new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 }
 else{
-
 $dbServer = '127.0.0.1';
 $dbUser = $_SERVER['MYSQL_USER'];
 $dbPass = $_SERVER['MYSQL_PASSWORD'];
@@ -36,10 +35,10 @@ $dbName = $_SERVER['MYSQL_DB'];
 $dsn = "mysql:host={$dbServer};dbname={$dbName};charset=utf8";
 $dbh = new PDO($dsn, $dbUser, $dbPass);
 
+
 }
 
 //$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
 
 $sql='SELECT name FROM mst_staff WHERE code=? AND password=?';
 $stmt=$dbh->prepare($sql);
