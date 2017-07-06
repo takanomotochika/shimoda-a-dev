@@ -32,6 +32,7 @@ $year=$_POST['year'];
 $month=$_POST['month'];
 $day=$_POST['day'];
 
+
 require_once('../common/common.php');
 if (DEBUG) {
 $dsn='mysql:dbname=shop;host=localhost;charset=utf8';
@@ -48,6 +49,7 @@ $dbName = $_SERVER['MYSQL_DB'];
 $dsn = "mysql:host={$dbServer};dbname={$dbName};charset=utf8";
 $dbh = new PDO($dsn, $dbUser, $dbPass);
 }
+
 
 $sql='
 SELECT

@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>YOMOTTO書籍販売</title>
+</head>
+<body>
 <?php
 
 try
@@ -26,6 +33,7 @@ $dbPass = $_SERVER['MYSQL_PASSWORD'];
 $dbName = $_SERVER['MYSQL_DB'];
 $dsn = "mysql:host={$dbServer};dbname={$dbName};charset=utf8";
 $dbh = new PDO($dsn, $dbUser, $dbPass);
+
 }
 
 $sql='SELECT code,name FROM dat_member WHERE email=? AND password=?';
@@ -61,3 +69,6 @@ catch(Exception $e)
 }
 
 ?>
+
+</body>
+</html>
