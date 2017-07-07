@@ -304,7 +304,7 @@ while(true)
  	print '<a href="shop_product.php?procode='.$rec['code'].'">'; 
  	print $rec['name'].'---'; 
  	print $rec['price'].'円'; 
- 	print '</a>'; 
+       	print '</a>'; 
  	print '<br />'; 
         $count++;
 	} 
