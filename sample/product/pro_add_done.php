@@ -36,7 +36,6 @@ $pro_price=$post['price'];
 $pro_stock=$post['stock'];
 $pro_gazou_name=$post['gazou_name'];
 
-require_once('../common/common.php');
 if (DEBUG) {
 $dsn='mysql:dbname=shop;host=localhost;charset=utf8';
 $user='root';
