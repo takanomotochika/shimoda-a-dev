@@ -26,13 +26,14 @@ else
 <body>
 
 <?php
+require_once('../common/common.php');
 
 print '人気商品--------------------<br /><br />';
 
 try{
 
 //DB接続
-require_once('../common/common.php');
+
 if (DEBUG) {
 $dsn='mysql:dbname=shop;host=localhost;charset=utf8';
 $user='root';
@@ -72,6 +73,7 @@ while(true)
  $p_gazou[]=$rec['gazou'];
 
 }
+$pro_num=count($p_code);
 
 //注文データ
 $sql='SELECT code,code_product,quantity FROM dat_sales_product WHERE 1';
@@ -100,7 +102,7 @@ $dbh=null;
 for ($i = 0; $i < $sales_num; $i++){
  for ($j = 0; $j < $pro_num; $j++){
     if($s_pro_code[$i]===$p_code[$j]){
-    $p_sum[$j]=$p_sum[$j]+$s_quantity[$i];
+        $p_sum[$j]=$p_sum[$j]+$s_quantity[$i];
   }
  }
 }
@@ -185,7 +187,6 @@ print '<br /><br />';
 <?php
 try
 {
-require_once('../common/common.php');
 if (DEBUG) 
 {
 $dsn='mysql:dbname=shop;host=localhost;charset=utf8';
