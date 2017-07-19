@@ -1,7 +1,9 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>YOMOTTO書籍販売</title>
 </head>
 <body>
 
@@ -18,8 +20,6 @@ $staff_pass=$post['pass'];
 
 $staff_pass=md5($staff_pass);
 
-
-require_once('../common/common.php');
 if (DEBUG) {
 $dsn='mysql:dbname=shop;host=localhost;charset=utf8';
 $user='root';
@@ -28,18 +28,13 @@ $dbh=new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 }
 else{
-
 $dbServer = '127.0.0.1';
 $dbUser = $_SERVER['MYSQL_USER'];
 $dbPass = $_SERVER['MYSQL_PASSWORD'];
 $dbName = $_SERVER['MYSQL_DB'];
 $dsn = "mysql:host={$dbServer};dbname={$dbName};charset=utf8";
 $dbh = new PDO($dsn, $dbUser, $dbPass);
-
 }
-
-//$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
 
 $sql='SELECT name FROM mst_staff WHERE code=? AND password=?';
 $stmt=$dbh->prepare($sql);
@@ -62,7 +57,8 @@ else
 	$_SESSION['login']=1;
 	$_SESSION['staff_code']=$staff_code;
 	$_SESSION['staff_name']=$rec['name'];
-	header('Location:staff_top.php');
+        ob_end_clean();
+        header('Location:staff_top.php');
 	exit();
 }
 
@@ -74,6 +70,5 @@ catch(Exception $e)
 }
 
 ?>
-
 </body>
 </html>
